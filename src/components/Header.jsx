@@ -8,27 +8,15 @@ const Header = () => {
   const headerRef = useRef(null);
   const [headerHeight, setHeaderHeight] = useState(0);
 
-  // Available categories to show in desktop hamburger sidebar
+  // Catégories (libellés FR + icônes)
   const categories = [
-    'Motorcycle Helmet',
-    'Biker Equipment',
-    'Airbag / Protection',
-    'Spare Parts / Accessories',
-    'Sportswear',
-    'Scooter Equipment',
+    { label: 'Casques moto', path: '/helmets', icon: '🪖' },
+    { label: 'Équipements motard', path: '/biker-equipments', icon: '🧥' },
+    { label: 'Airbag & Protection', path: '/airbag-protection', icon: '🛡️' },
+    { label: 'Pièces détachées & accessoires', path: '/spare-parts-accessories', icon: '⚙️' },
+    { label: 'Vêtements de sport', path: '/sportswear', icon: '👕' },
+    { label: 'Équipement scooter', path: '/scooter-equipment', icon: '🛵' },
   ];
-
-  const categoryRoute = (name) => {
-    const map = {
-      'Motorcycle Helmet': '/helmets',
-      'Biker Equipment': '/biker-equipments',
-      'Airbag / Protection': '/airbag-protection',
-      'Spare Parts / Accessories': '/spare-parts-accessories',
-      'Sportswear': '/sportswear',
-      'Scooter Equipment': '/scooter-equipment',
-    };
-    return map[name] || '/';
-  };
 
   useEffect(() => {
     const measure = () => {
@@ -91,15 +79,30 @@ const Header = () => {
             {isDesktop ? (
               <ul className="sidebar__nav">
                 {categories.map((cat) => (
-                  <li key={cat}>
-                    <Link to={categoryRoute(cat)} onClick={closeSidebar}>{cat}</Link>
+                  <li key={cat.path}>
+                    <Link to={cat.path} onClick={closeSidebar}>
+                      <span style={{marginRight: 8}}>{cat.icon}</span>
+                      <span>{cat.label}</span>
+                    </Link>
                   </li>
                 ))}
               </ul>
             ) : (
               <ul className="sidebar__nav">
                 <li><Link to="/" onClick={closeSidebar}>Accueil</Link></li>
-                <li><Link to="/categories" onClick={closeSidebar}>Catégories</Link></li>
+                {/* Full categories list on mobile, same as desktop */}
+                <li style={{marginTop: 8, fontWeight: 700}}>Catégories</li>
+                {categories.map((cat) => (
+                  <li key={cat.path} style={{paddingLeft: 8}}>
+                    <Link to={cat.path} onClick={closeSidebar}>
+                      <span style={{marginRight: 8}}>{cat.icon}</span>
+                      <span>{cat.label}</span>
+                    </Link>
+                  </li>
+                ))}
+                {/* Keep extra links too on mobile */}
+                <li style={{marginTop: 12, fontWeight: 700}}>Plus</li>
+                <li><Link to="/categories" onClick={closeSidebar}>Toutes les catégories</Link></li>
                 <li><Link to="/helmets" onClick={closeSidebar}>Casques moto</Link></li>
                 <li><Link to="/offers" onClick={closeSidebar}>Offres</Link></li>
                 <li><Link to="/contact" onClick={closeSidebar}>Contact</Link></li>

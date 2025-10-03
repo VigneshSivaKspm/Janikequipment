@@ -9,7 +9,7 @@ const Section = ({ title, children }) => (
 );
 
 const KeyValue = ({ k, v }) => (
-  <div style={{ display: 'grid', gridTemplateColumns: '200px 1fr', gap: 12, padding: '8px 0', borderBottom: '1px solid #f3f4f6' }}>
+  <div style={{ display: 'grid', gridTemplateColumns: 'minmax(100px, 40%) 1fr', gap: 12, padding: '8px 0', borderBottom: '1px solid #f3f4f6' }}>
     <div style={{ color: '#6b7280', fontWeight: 600 }}>{k}</div>
     <div style={{ color: '#111827', whiteSpace: 'pre-wrap' }}>{String(v)}</div>
   </div>
@@ -91,12 +91,12 @@ const ProductDetailsPage = () => {
   const nextImage = () => setActiveIdx((i) => (i + 1) % resolvedImages.length);
 
   return (
-    <section style={{ maxWidth: 1200, width: '100%', boxSizing: 'border-box', margin: '0 auto', padding: isDesktop ? '48px 24px' : '24px 16px' }}>
+    <section style={{ maxWidth: 1200, width: '100%', boxSizing: 'border-box', margin: '0 auto', padding: isDesktop ? '48px 24px' : '24px 16px', overflowX: 'hidden' }}>
       <button onClick={() => navigate(-1)} style={{ marginBottom: 16, background: '#f3f4f6', color: '#111827', border: '1px solid #e5e7eb', padding: '8px 12px', borderRadius: 8, cursor: 'pointer' }}>← Retour</button>
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: isDesktop ? 24 : 16, overflow: 'hidden' }}>
         {/* Hero card */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 24 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 24, minWidth: 0 }}>
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'minmax(0, 1fr)',
@@ -105,7 +105,7 @@ const ProductDetailsPage = () => {
             <div style={{ background: '#fff', border: '1px solid #e5e7eb', borderRadius: 16, padding: isDesktop ? 28 : 16 }}>
               <div style={{ display: 'grid', gridTemplateColumns: isDesktop ? '5fr 7fr' : '1fr', gap: isDesktop ? 24 : 16, alignItems: 'start' }}>
                 {/* Gallery */}
-                <div style={isDesktop ? { position: 'sticky', top: 88 } : { maxWidth: '100%' }}>
+                <div style={isDesktop ? { position: 'sticky', top: 88, minWidth: 0 } : { maxWidth: '100%', minWidth: 0 }}>
                   {/* Main image with arrows */}
                   <div style={{ position: 'relative', background: '#f9fafb', borderRadius: 12, overflow: 'hidden', border: '1px solid #e5e7eb' }}>
                     {hasImages ? (
@@ -171,7 +171,7 @@ const ProductDetailsPage = () => {
                 </div>
 
                 {/* Info */}
-                <div>
+                <div style={{ minWidth: 0 }}>
                   <h1 style={{ fontSize: isDesktop ? 34 : 24, fontWeight: 900, marginBottom: 8, letterSpacing: -0.2, wordBreak: 'break-word' }}>{name}</h1>
                   {brand && (
                     <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>

@@ -97,6 +97,16 @@
 @media (max-width: 768px) {
   .footer-features {
     grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+  }
+  
+  .feature {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .feature-info {
+    text-align: center;
   }
   
   .social-links {
@@ -107,6 +117,7 @@
 @media (max-width: 480px) {
   .footer-features {
     grid-template-columns: 1fr;
+    justify-items: center;
   }
   
   .footer {
