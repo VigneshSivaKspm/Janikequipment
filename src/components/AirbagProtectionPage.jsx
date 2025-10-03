@@ -83,8 +83,8 @@ const AirbagProtectionPage = ({ variant = 'grid' }) => {
         {products.map((product, idx) => {
           const firstImage = product && product.images && product.images.length > 0 ? product.images[0] : null;
           const imgSrc = firstImage
-            ? (firstImage.startsWith('/')
-                ? firstImage
+            ? (firstImage.includes('/')
+                ? (firstImage.startsWith('/') ? firstImage : `/${firstImage}`)
                 : `/assets/Product-images/Airbag%20%26%20Protection/${firstImage}`)
             : null;
           return (

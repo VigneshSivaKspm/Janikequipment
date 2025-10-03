@@ -130,8 +130,8 @@ const BikerEquipmentsPage = ({ variant = 'grid' }) => {
         {equipments.map((equipment, idx) => {
           const firstImage = equipment && equipment.images && equipment.images.length > 0 ? equipment.images[0] : null;
           const imgSrc = firstImage
-            ? (firstImage.startsWith('/')
-                ? firstImage
+            ? (firstImage.includes('/')
+                ? (firstImage.startsWith('/') ? firstImage : `/${firstImage}`)
                 : `/assets/Product-images/Biker-equipments/${firstImage}`)
             : null;
           return (

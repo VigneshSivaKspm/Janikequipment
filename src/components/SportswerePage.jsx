@@ -91,7 +91,11 @@ const SportswerePage = ({ variant = 'grid' }) => {
         {products.map((product, idx) => {
           const firstImage = product && product.images && product.images.length > 0 ? product.images[0] : null;
           // Build candidate image URLs with common fallback filename patterns for this dataset
-          const normalize = (p) => (p && !p.startsWith('/') ? `/assets/Product-images/Sportswere/${p}` : p);
+          const normalize = (p) => {
+            if (!p) return p;
+            if (p.includes('/')) return p.startsWith('/') ? p : `/${p}`;
+            return `/assets/Product-images/Sportswere/${p}`;
+          };
           const candidates = [];
           if (firstImage) {
             const base = normalize(firstImage);

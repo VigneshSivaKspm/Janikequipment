@@ -36,7 +36,9 @@ const buildProducts = (slug, data) => {
         name: p.name,
         price: formatPrice(p.price),
         image: Array.isArray(p.images)
-          ? (p.images[0]?.startsWith('/') ? p.images[0] : `/assets/Product-images/Motorcycle-Helmets/${p.images[0]}`)
+          ? (p.images[0]?.includes('/')
+              ? normalizeImagePath(p.images[0])
+              : buildAssetsPath('Motorcycle-Helmets', p.images[0]))
           : undefined,
         description: typeof p.description === 'string' ? p.description : '',
         raw: p,
@@ -49,7 +51,9 @@ const buildProducts = (slug, data) => {
         name: p.name,
         price: formatPrice(p.price),
         image: Array.isArray(p.images)
-          ? (p.images[0]?.startsWith('/') ? p.images[0] : `/assets/Product-images/Biker-equipments/${p.images[0]}`)
+          ? (p.images[0]?.includes('/')
+              ? normalizeImagePath(p.images[0])
+              : buildAssetsPath('Biker-equipments', p.images[0]))
           : undefined,
         description: typeof p.description === 'string' ? p.description : '',
         raw: p,
@@ -65,7 +69,9 @@ const buildProducts = (slug, data) => {
         name: p.name,
         price: formatPrice(p.price),
         image: Array.isArray(p.images)
-          ? (p.images[0]?.startsWith('/') ? p.images[0] : `/assets/Product-images/Airbag%20%26%20Protection/${p.images[0]}`)
+          ? (p.images[0]?.includes('/')
+              ? normalizeImagePath(p.images[0])
+              : buildAssetsPath('Airbag & Protection', p.images[0]))
           : undefined,
         description: typeof p.description === 'string' ? p.description : '',
         raw: p,
@@ -93,7 +99,9 @@ const buildProducts = (slug, data) => {
         name: p.name,
         price: p.salePrice != null ? `${p.salePrice} €` : (p.originalPrice != null ? `${p.originalPrice} €` : ''),
         image: Array.isArray(p.images)
-          ? (p.images[0]?.startsWith('/') ? p.images[0] : `/assets/Product-images/Sportswere/${p.images[0]}`)
+          ? (p.images[0]?.includes('/')
+              ? normalizeImagePath(p.images[0])
+              : buildAssetsPath('Sportswere', p.images[0]))
           : undefined,
         description: typeof p.description === 'string' ? p.description : '',
         raw: p,

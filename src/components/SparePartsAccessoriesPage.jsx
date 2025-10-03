@@ -8,7 +8,7 @@ const SparePartsAccessoriesPage = ({ variant = 'grid' }) => {
 
   useEffect(() => {
     // Keep path convention consistent with existing pages
-    fetch("/Product-details/Spare_parts-Accessories.json")
+    fetch("/Product-details/Spare_Parts_Accessories.json")
       .then((res) => res.json())
       .then((data) => setProducts(data.products || []));
 
@@ -77,11 +77,11 @@ const SparePartsAccessoriesPage = ({ variant = 'grid' }) => {
       <div style={containerStyle}>
         {products.map((product, idx) => {
           const firstImage = product && product.images && product.images.length > 0 ? product.images[0] : null;
-          // If the JSON has just filenames, prefix with the public assets path.
-          // If it already starts with '/', treat it as a web-root path.
+          // If the JSON provides a path containing '/', normalize to ensure a single leading '/'.
+          // Otherwise, build from the expected folder.
           const imgSrc = firstImage
-            ? (firstImage.startsWith('/')
-                ? firstImage
+            ? (firstImage.includes('/')
+                ? (firstImage.startsWith('/') ? firstImage : `/${firstImage}`)
                 : `/assets/Product-images/Spare Parts & Accessories/${firstImage}`)
             : null;
           return (
